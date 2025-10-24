@@ -180,15 +180,15 @@ class PagaBusiness extends UtilFunction {
      * @param   {string}  alternateSenderName           If the cash is being sent on behalf of the third party itself (i.e. sender principal is null), then an alternative name-of-sender can be specified here for use in the message sent to the money transfer recipient. This field is ignored if money transfer is sent on behalf of another user. This can be 16 characters in length.
      * @param   {number}  holdingPeriod                 The number of days with which the recipient's KYC must have before it is reverted back to the sender. It is only valid if the minKYCLevel is set and it's default to 120 days. If minKYCLevel is set and the recipient?s KYC is below it, then this will be the number of days it should wait to meet the minKYC Level provided. If the target KYC is not upgraded within this period the fund will be returned back to the sender?s account.
      * @param   {string}  minRecipientKYCLevel         The minimum target KYC level the money transfer transaction recipient's paga account must have, can be one of KYC1, KYC2, and KYC3.
-     * @param   {string}  senderFormalName              Full name of the sender. Mandatory for IMTOs.
-     * @param   {string}  senderGender                  Gender of the sender (e.g. MALE, FEMALE). Mandatory for IMTOs.
-     * @param   {string}  senderOccupation              Occupation category of the sender (e.g. FORMAL, INFORMAL). Mandatory for IMTOs.
-     * @param   {number}  senderAge                     Age of the sender. Mandatory for IMTOs.
-     * @param   {string}  senderAddress                 Physical address of the sender. Mandatory for IMTOs.
-     * @param   {string}  recipientAddress              Physical address of the recipient. Mandatory for IMTOs.
-     * @param   {string}  sourceCurrency                Currency from which the transfer originates (e.g. USD, GBP). Mandatory for IMTOs.
-     * @param   {number}  sourceAmount                  Original amount before exchange. Mandatory for IMTOs.
-     * @param   {number}  effectiveExchangeRate        Exchange rate used to convert from sourceCurrency to currency. Mandatory for IMTOs.
+     * @param   {string | null}  senderFormalName              Full name of the sender. Mandatory for IMTOs.
+     * @param   {string | null}  senderGender                  Gender of the sender (e.g. MALE, FEMALE). Mandatory for IMTOs.
+     * @param   {string | null}  senderOccupation              Occupation category of the sender (e.g. FORMAL, INFORMAL). Mandatory for IMTOs.
+     * @param   {number | null}  senderAge                     Age of the sender. Mandatory for IMTOs.
+     * @param   {string | null}  senderAddress                 Physical address of the sender. Mandatory for IMTOs.
+     * @param   {string | null}  recipientAddress              Physical address of the recipient. Mandatory for IMTOs.
+     * @param   {string | null}  sourceCurrency                Currency from which the transfer originates (e.g. USD, GBP). Mandatory for IMTOs.
+     * @param   {number | null}  sourceAmount                  Original amount before exchange. Mandatory for IMTOs.
+     * @param   {number | null}  effectiveExchangeRate        Exchange rate used to convert from sourceCurrency to currency. Mandatory for IMTOs.
                                                     
                                                     
      *
@@ -219,15 +219,15 @@ class PagaBusiness extends UtilFunction {
         alternateSenderName,
         minRecipientKYCLevel,
         holdingPeriod,
-        senderFormalName,
-        senderGender,
-        senderOccupation,
-        senderAge,
-        senderAddress,
-        recipientAddress,
-        sourceCurrency,
-        sourceAmount,
-        effectiveExchangeRate) {
+        senderFormalName = null,
+        senderGender = null,
+        senderOccupation = null,
+        senderAge = null,
+        senderAddress = null ,
+        recipientAddress = null ,
+        sourceCurrency = null,
+        sourceAmount = null,
+        effectiveExchangeRate = null) {
 
         try {
             const data = {
@@ -463,15 +463,15 @@ class PagaBusiness extends UtilFunction {
      * @param   {string}    suppressRecipientMessage            If this field is set to true, no notification message (SMS or email) will be sent to the recipient. IF omitted or set to false, an email or SMS will be sent to recipient as described above.
      * @param   {string}    remarks                             Additional bank transfer remarks that you may wish to appear on your bank statement record for this transaction. Remarks are limited to 30 characters and will be truncated if longer.
      * @param   {string}    locale                              The language/locale to be used in messaging. If provided, this must conform to the IETF language tag standard.
-     * @param   {string}    senderFormalName                    Full name of the sender. Mandatory for IMTOs.
-     * @param   {string}    senderGender                        Gender of the sender (e.g. MALE, FEMALE). Mandatory for IMTOs.
-     * @param   {string}    senderOccupation                    Occupation category of the sender (e.g. FORMAL, INFORMAL). Mandatory for IMTOs.
-     * @param   {number}    senderAge                           Age of the sender. Mandatory for IMTOs.
-     * @param   {string}    senderAddress                       Physical address of the sender. Mandatory for IMTOs.
-     * @param   {string}    recipientAddress                    Physical address of the recipient. Mandatory for IMTOs.
-     * @param   {string}    sourceCurrency                      Currency from which the transfer originates (e.g. USD, GBP). Mandatory for IMTOs.
-     * @param   {number}    sourceAmount                        Original amount before exchange. Mandatory for IMTOs.
-     * @param   {number}    effectiveExchangeRate              Exchange rate used to convert from sourceCurrency to currency. Mandatory for IMTOs.
+     * @param   {string | null}    senderFormalName                    Full name of the sender. Mandatory for IMTOs.
+     * @param   {string | null}    senderGender                        Gender of the sender (e.g. MALE, FEMALE). Mandatory for IMTOs.
+     * @param   {string | null}    senderOccupation                    Occupation category of the sender (e.g. FORMAL, INFORMAL). Mandatory for IMTOs.
+     * @param   {number | null}    senderAge                           Age of the sender. Mandatory for IMTOs.
+     * @param   {string | null}    senderAddress                       Physical address of the sender. Mandatory for IMTOs.
+     * @param   {string | null}    recipientAddress                    Physical address of the recipient. Mandatory for IMTOs.
+     * @param   {string | null}    sourceCurrency                      Currency from which the transfer originates (e.g. USD, GBP). Mandatory for IMTOs.
+     * @param   {number | null}    sourceAmount                        Original amount before exchange. Mandatory for IMTOs.
+     * @param   {number | null}    effectiveExchangeRate              Exchange rate used to convert from sourceCurrency to currency. Mandatory for IMTOs.
      * @return {Promise}                                        A Promise Object thats receives the response
                                                     
         Sample Successful Response =>   {
@@ -497,15 +497,15 @@ class PagaBusiness extends UtilFunction {
         suppressRecipientMessage,
         remarks,
         locale,
-        senderFormalName,
-        senderGender,
-        senderOccupation,
-        senderAge,
-        senderAddress,
-        recipientAddress,
-        sourceCurrency,
-        sourceAmount,
-        effectiveExchangeRate) {
+        senderFormalName = null,
+        senderGender = null,
+        senderOccupation = null,
+        senderAge = null,
+        senderAddress = null,
+        recipientAddress = null,
+        sourceCurrency = null,
+        sourceAmount = null,
+        effectiveExchangeRate = null) {
 
         try {
             const data = {
